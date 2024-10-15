@@ -3,7 +3,7 @@ const indexJS = require('../index.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('ping')
+		.setName('ptping')
 		.setDescription('Replies with Pong!')
 		.addStringOption(option =>
 			option.setName('partyname')
@@ -13,14 +13,15 @@ module.exports = {
 	async autocomplete(interaction) {
 		const user = interaction.user
 		const focusedValue = interaction.options.getFocused();
-		let choices = indexJS.partyNameList.map(pt => {
-			if (pt.memberlist.includes(user.id)) {
-				return pt.name
+		
+		var choices = []
+		indexJS.partyNameList.forEach(item => {
+			if (item.memberlist.includes(user.id)) {
+				return choices.push(item.name)
 			}
-			return null
-		})
+		});
 		if (choices.length < 1 ) return;
-
+		
 		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
 		await interaction.respond(
 			filtered.map(choice => ({ name: choice, value: choice })),

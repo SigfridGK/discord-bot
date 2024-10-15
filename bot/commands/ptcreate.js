@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, ChannelType, blockQuote, bold, italic, ThreadAutoArchiveDuration } = require('discord.js');
+const { SlashCommandBuilder, blockQuote, bold, italic } = require('discord.js');
 const indexJS = require('../index.js')
 
 module.exports = {
@@ -23,19 +23,21 @@ module.exports = {
                 return;
             }
             
-            var ptInfo = {
-                name: threadName,
-                pl: user.id,
-                memberlist: user.id
-            }
-            indexJS.partyNameList.push(ptInfo)
-
             const botMsgContent = blockQuote(italic('New party posted!\n🔸 ')+bold(threadName));
-            const botMsg = await interaction.reply({ 
+            await interaction.reply({ 
                 content: botMsgContent,
                 fetchReply: true
+            }).then(msg => {
+                var ptInfo = {
+                    name: threadName,
+                    ptMsgID: msg.id,
+                    pl: user.id,
+                    memberlist: user.id
+                }
+                indexJS.partyNameList.push(ptInfo)
+                msg.react('✅')
             })
-            botMsg.react('✅')
+
         } catch (error) { 
             console.log(error); 
         } 
