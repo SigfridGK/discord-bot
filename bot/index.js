@@ -1,9 +1,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const ptCommand = require('./ptcommands/ptcommands.js');
+const reactionEvent = require('./eventReaction.js');
 
 // Require the necessary discord.js classes
 const { Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { token } = require('../config.json');
+exports.partyNameList = [];
 
 // Create a new client instance
 const client = new Client({ 
@@ -38,43 +41,87 @@ client.once(Events.ClientReady, readyClient => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	if (interaction.isChatInputCommand()) {
+		const command = interaction.client.commands.get(interaction.commandName);
+	
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
 		}
-	}
-});
-
-client.on(Events.MessageCreate, async message => {
-    if (message.content.includes("@ptJOIN")){
-		const messageArr = message.content.split(" ");
-		if (messageArr.length == 2) {
-			const guild = client.guilds.cache.get(message.guildId);
-            const threads = guild.channels.cache.filter(x => x.isThread());
-			
-			const arrThreads = Array.from(threads.values());
-			const thread = arrThreads.filter(x => x.id === messageArr[1]);
-			if (thread.length > 0) {
-				const user = message.author.id;
-				thread[0].members.add(user)
+	
+		try {
+			await command.execute(interaction);
+		} catch (error) {
+			console.error(error);
+			if (interaction.replied || interaction.deferred) {
+				await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+			} else {
+				await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 			}
 		}
-    }
+	} else if (interaction.isAutocomplete()) {
+		const command = interaction.client.commands.get(interaction.commandName);
+
+		if (!command) {
+			console.error(`No command matching ${interaction.commandName} was found.`);
+			return;
+		}
+
+		try {
+			await command.autocomplete(interaction);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 });
 
-// Log in to Discord with your client's token
+
+
+//////////////////////////////////////  
+// Events ACTION HERE				//
+//////////////////////////////////////
+client.on(Events.MessageCreate, async message => {
+	ptCommand.ptJoin(message, client)
+});
+
+client.on(Events.MessageReactionRemove, async (reaction, user) => {
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch {}
+	}
+	const channelID = reaction.message.channelId
+	client.channels.fetch(channelID).then(channel => {
+		switch (channel.name) {
+			case "PVE":
+				reactionEvent.ptLeave(reaction, user)
+				break;
+		
+			default:
+			break;
+		}
+	});
+});
+
+client.on(Events.MessageReactionAdd, async (reaction, user) => {
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch {}
+	}
+
+	const channelID = reaction.message.channelId
+	client.channels.fetch(channelID).then(channel => {
+		switch (channel.name) {
+			case "PVE":
+				reactionEvent.ptJOIN(reaction, user)
+				break;
+		
+			default:
+			break;
+		}
+	});
+});
+
+// start
 client.login(token);
