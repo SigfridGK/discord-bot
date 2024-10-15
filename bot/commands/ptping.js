@@ -45,9 +45,11 @@ module.exports = {
         const members = indexJS.partyNameList[i].memberlist.split("::")
 		var idList = ""
 
-		await members.forEach(element => {
-			idList += "<@" + element + "> "
-		});
+		if (members.length > 0) {
+			await members.forEach(element => {
+				idList += "<@" + element + "> "
+			});
+		}
 
 		channel.send(idList).then(repliedMessage => {
 			setTimeout(() => repliedMessage.delete(), 300);

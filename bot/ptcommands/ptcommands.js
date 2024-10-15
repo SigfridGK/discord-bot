@@ -5,15 +5,20 @@ const { blockQuote, bold } = require('discord.js');
 exports.ptJoin = function (message) { 
     if (message.content.toLowerCase().includes("@ptjoin")){
 		const messageArr = message.content.split(" ");
-		if (messageArr.length == 2) {
+		if (messageArr.length >= 2) {
 			const user = message.author
-			let i = indexJS.partyNameList.findIndex(pt => pt.name == messageArr[1])
+			var ptName = messageArr[1]
+			if (messageArr.length > 2) {
+				ptName = message.content.replace("@ptjoin ", "")
+			}
+			
+			let i = indexJS.partyNameList.findIndex(pt => pt.name == ptName)
 			if (i == -1) return;
 
 			var members = indexJS.partyNameList[i].memberlist;
 			indexJS.partyNameList[i].memberlist = members +"::"+user.id
 
-			const botMsgContent = blockQuote('You join the party.\n🔸 Party '+bold(messageArr[1]));
+			const botMsgContent = blockQuote('You join the party.\n🔸 Party '+bold(ptName));
 			message.reply({
 				content: botMsgContent,
 				ephemeral: true
@@ -28,9 +33,14 @@ exports.ptJoin = function (message) {
 exports.ptLeave = function (message) { 
     if (message.content.toLowerCase().includes("@ptleave")){
 		const messageArr = message.content.split(" ");
-		if (messageArr.length == 2) {
+		if (messageArr.length >= 2) {
 			const user = message.author
-			let i = indexJS.partyNameList.findIndex(pt => pt.name == messageArr[1])
+			var ptName = messageArr[1]
+			if (messageArr.length > 2) {
+				ptName = message.content.replace("@ptleave ", "")
+			}
+
+			let i = indexJS.partyNameList.findIndex(pt => pt.name == ptName)
 			if (i == -1) return;
 
 			var members = indexJS.partyNameList[i].memberlist;
@@ -38,7 +48,7 @@ exports.ptLeave = function (message) {
 			arrMember = arrMember.filter(pt => pt != user.id)
 			indexJS.partyNameList[i].memberlist = arrMember.join("::")
 
-			const botMsgContent = blockQuote('You left the party.\n🔸 Party '+bold(messageArr[1]));
+			const botMsgContent = blockQuote('You left the party.\n🔸 Party '+bold(ptName));
 			message.reply({
 				content: botMsgContent,
 				ephemeral: true
@@ -54,9 +64,12 @@ exports.ptLeave = function (message) {
 exports.ptPing = function (message) { 
     if (message.content.toLowerCase().includes("@ptping")){
 		const messageArr = message.content.split(" ");
-		if (messageArr.length == 2) {
+		if (messageArr.length >= 2) {
 			const channel = message.channel
-			const ptName = messageArr[1]
+			var ptName = messageArr[1]
+			if (messageArr.length > 2) {
+				ptName = message.content.replace("@ptping ", "")
+			}
 	
 			let i = indexJS.partyNameList.findIndex(pt => pt.name == ptName)
 			if (i == -1) {
@@ -73,9 +86,11 @@ exports.ptPing = function (message) {
 			const members = indexJS.partyNameList[i].memberlist.split("::")
 			var idList = ""
 	
-			members.forEach(element => {
-				idList += "<@" + element + "> "
-			});
+			if (members.length > 0) {
+				members.forEach(element => {
+					idList += "<@" + element + "> "
+				});
+			}
 	
 			channel.send(idList).then(repliedMessage => {
 				setTimeout(() => repliedMessage.delete(), 300);

@@ -15,7 +15,7 @@ module.exports = {
       
             interaction.channel.bulkDelete(botMessages)
             interaction.reply({
-                content: "Party Chats cleaned.",
+                content: "Party chat cleaned.",
                 ephemeral: true
             }).then(msg => {
                 setTimeout(() => msg.delete(), 2200);
