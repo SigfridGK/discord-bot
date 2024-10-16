@@ -47,7 +47,9 @@ module.exports = {
 
 		if (members.length > 0) {
 			await members.forEach(element => {
-				idList += "<@" + element + "> "
+				if (element.length > 0) {
+					idList += "<@" + element + "> "
+				}
 			});
 		}
 

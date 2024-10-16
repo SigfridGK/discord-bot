@@ -1,0 +1,8 @@
+
+{
+  "date": "10/16/2024 01:12 PM",
+  "file": "mysqlcontroller.js",
+  "data": "FrDN",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') WHERE pt_type='FrDN'' at line 1"
+}

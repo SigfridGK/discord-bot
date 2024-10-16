@@ -2,9 +2,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const ptCommand = require('./ptcommands/ptcommands.js');
 const reactionEvent = require('./eventReaction.js');
+const buttonEvent = require('./eventButton.js');
+const dbSelect = require('./server/select.js')
 
 // Require the necessary discord.js classes
-const { Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, Partials, ButtonStyle } = require('discord.js');
 const { token } = require('../config.json');
 exports.partyNameList = [];
 
@@ -37,6 +39,10 @@ for (const file of commandFiles) {
 // The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, readyClient => {
+	dbSelect.selectPTList(async function(res){
+		if (res.data == '[]') return;
+		exports.partyNameList = JSON.parse(res.data)
+	})
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
@@ -63,6 +69,7 @@ client.on(Events.InteractionCreate, async interaction => {
 							await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 						}
 					}
+					
 				} else if (interaction.isAutocomplete()) {
 					const command = interaction.client.commands.get(interaction.commandName);
 			
@@ -76,6 +83,9 @@ client.on(Events.InteractionCreate, async interaction => {
 					} catch (error) {
 						console.error(error);
 					}
+
+				} else if (interaction.isButton()) {
+					buttonEvent.ptTypeButton(interaction)
 				}
 				break;
 			default:
@@ -97,6 +107,7 @@ client.on(Events.MessageCreate, async message => {
 				ptCommand.ptJoin(message)
 				ptCommand.ptLeave(message)
 				ptCommand.ptPing(message)
+				ptCommand.ptNotify(message)
 				break;
 		
 			default:
@@ -143,6 +154,22 @@ client.on(Events.MessageReactionAdd, async (reaction, user) => {
 		}
 	});
 });
+
+
+client.on(Events.TypingStart, async (reaction, user) => {
+	const channelID = reaction.message.channelId
+	client.channels.fetch(channelID).then(channel => {
+		switch (channel.name) {
+			case "PVE":
+				reactionEvent.ptJOIN(reaction, user)
+				break;
+		
+			default:
+			break;
+		}
+	});
+});
+
 
 // start
 client.login(token);

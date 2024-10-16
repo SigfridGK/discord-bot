@@ -1,0 +1,15 @@
+
+{
+  "date": "10/16/2024 03:45 PM",
+  "file": "mysqlcontroller.js",
+  "data": "[object Object]",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTList()] Error: UNKNOWN_CODE_PLEASE_REPORT: CONSTRAINT `dev_pt_list.pt_data` failed for `customer_857279_lizXD-v1db`.`dev_pt_list`"
+}
+{
+  "date": "10/16/2024 03:46 PM",
+  "file": "mysqlcontroller.js",
+  "data": "[object Object]",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTList()] Error: UNKNOWN_CODE_PLEASE_REPORT: CONSTRAINT `dev_pt_list.pt_data` failed for `customer_857279_lizXD-v1db`.`dev_pt_list`"
+}

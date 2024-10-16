@@ -1,0 +1,78 @@
+
+{
+  "date": "10/16/2024 12:41 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(textfield, '::', '683010560639762503') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:42 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::', '683010560639762503') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:44 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::'683010560639762503') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:45 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, ::'683010560639762503') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:46 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::'683010560639762503'') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:47 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::683010560639762503') WHERE pt_type='683010560639762503'' at line 1"
+}
+{
+  "date": "10/16/2024 12:48 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > selectAllQuery - 2",
+  "error_desc": "[select.js -> selectPTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, \"::683010560639762503\") WHERE pt_type='683010560639762503'' at line 1"
+}
+{
+  "date": "10/16/2024 12:49 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::'683010560639762503'') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:50 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=CONCAT(members, '::sdsd') WHERE pt_type='683010560639762503'' at line 1"
+}
+{
+  "date": "10/16/2024 12:51 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '683010560639762503'') WHERE pt_type='FrDN'' at line 1"
+}
+{
+  "date": "10/16/2024 12:51 AM",
+  "file": "mysqlcontroller.js",
+  "data": "683010560639762503,FrDN",
+  "function": "crud > updateQuery - 2",
+  "error_desc": "[update.js -> updatePTType()] Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '::'683010560639762503') WHERE pt_type='FrDN'' at line 1"
+}

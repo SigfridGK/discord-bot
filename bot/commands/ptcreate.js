@@ -1,5 +1,7 @@
-const { SlashCommandBuilder, blockQuote, bold, italic } = require('discord.js');
+const { SlashCommandBuilder, blockQuote, bold, italic, EmbedBuilder } = require('discord.js');
 const indexJS = require('../index.js')
+const dbInsert = require('../server/insert.js')
+const dbUpdate = require('../server/update.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -36,6 +38,7 @@ module.exports = {
                 }
                 indexJS.partyNameList.push(ptInfo)
                 msg.react('✅')
+                dbUpdate.updatePTList(indexJS.partyNameList)
             })
 
         } catch (error) { 
