@@ -1,6 +1,6 @@
 const { ButtonStyle, ActionRowBuilder, ButtonBuilder } = require('discord.js')
-const indexJS = require('./index.js')
-const db = require('./server/update.js')
+const indexJS = require('../../index.js')
+const db = require('../../server/update.js')
 
 exports.ptTypeButton = async function(interaction) {
     const userID = interaction.user.id

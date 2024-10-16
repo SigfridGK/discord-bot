@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, blockQuote, bold, strikethrough } = require('discord.js');
 const indexJS = require('../index.js')
+const dbUpdate = require('../server/update.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -45,6 +46,7 @@ module.exports = {
 				messages.reactions.removeAll()
 			})
 			indexJS.partyNameList.splice(i,1);
+			dbUpdate.updatePTList(indexJS.partyNameList)
 		})
 	},
 };

@@ -1,4 +1,5 @@
-const indexJS = require('./index.js')
+const indexJS = require('../../index.js')
+const dbUpdate = require('../../server/update.js')
 
 // PT JOIN via REACT
 exports.ptJOIN = async function (reaction, user) { 
@@ -18,6 +19,7 @@ exports.ptJOIN = async function (reaction, user) {
 
         var members = indexJS.partyNameList[i].memberlist;
         indexJS.partyNameList[i].memberlist = members +"::"+user.id
+		dbUpdate.updatePTList(indexJS.partyNameList)
 	} catch {
 	  return;
 	};
@@ -43,6 +45,7 @@ exports.ptLeave = function (reaction, user) {
         var arrMember = members.split("::")
         arrMember = arrMember.filter(pt => pt != user.id)
         indexJS.partyNameList[i].memberlist = arrMember.join("::")
+		dbUpdate.updatePTList(indexJS.partyNameList)
 	} catch {
 	  return;
 	};
