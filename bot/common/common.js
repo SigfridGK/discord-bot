@@ -2,6 +2,7 @@
 // IMPORTS
 //***************
 const fs = require('node:fs');
+const { console } = require('node:inspector');
 const path = require('node:path');
 
 
@@ -145,9 +146,16 @@ exports.generateRandomNumber = function(length) {
     return randomnumbertxn;
 }
 
-exports.checkIsPVEChannel = function(channelID, client) {
+exports.checkIsPVEChannel = async function(channelID, client)  {
     client.channels.fetch(channelID).then(async channel => {
-        return channel.name == "PVE" 
+        console.log(channel)
+        return channel.name
+    });
+}
+
+exports.checkIsNewsChannel = function(channelID, client) {
+    client.channels.fetch(channelID).then(async channel => {
+        return channel.name == "news" 
     });
 }
 

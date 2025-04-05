@@ -112,6 +112,8 @@ exports.ptNotify = function (message) {
     if (message.content.toLowerCase().includes("@ptnotify")){
 		const messageArr = message.content.split(" ");
 		if (messageArr.length >= 2) {
+			const channelId = message.channelId
+			const messageId = message.id
 			const channel = message.channel
 			var ptName = messageArr[1]
 			if (messageArr.length > 2) {
@@ -122,7 +124,8 @@ exports.ptNotify = function (message) {
 				if (res.data == []) {
 					return;
 				}
-				const members = res.data.split("::")
+				const pt_type = res.data.pt_type;
+				const members = res.data.members.split("::")
 				var idList = ""
 		
 				if (members.length > 0) {
@@ -132,12 +135,10 @@ exports.ptNotify = function (message) {
 						}
 					});
 				}
-		
 				channel.send(idList).then(repliedMessage => {
 					setTimeout(() => repliedMessage.delete(), 300);
 				});
-		
-				const botMsgContent = blockQuote('Pong!\n🔸 Party Type '+bold(ptName));
+				const botMsgContent = blockQuote('🔸 Party Type '+bold(pt_type));
 				message.reply({
 					content: botMsgContent,
 				})

@@ -15,7 +15,7 @@ exports.updatePTType = function (req, type, callback) {
     function (result) {
 		if (result == 'error') {
 			var resultObj = {'data': resultdata, 'status': 'error', 'message': 'Server Error'};
-            console.log(resultObj)
+            console.log(resultObj + " ->updatePTType")
 		}else{
 			var resultObj = {'data': resultdata, 'status': '000', 'message': 'success'};
             callback(resultObj)
@@ -36,10 +36,10 @@ exports.updatePTList = function (req) {
     function (result) {
 		if (result == 'error') {
 			var resultObj = {'data': resultdata, 'status': 'error', 'message': 'Server Error'};
-            console.log(resultObj)
+            console.log(resultObj + " ->updatePTList")
 		}else{
 			var resultObj = {'data': true, 'status': '000', 'message': 'success'};
-            console.log(resultObj)
+            console.log(resultObj + " ->updatePTList")
 		}
 	});
 }

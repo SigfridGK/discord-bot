@@ -15,7 +15,7 @@ module.exports = {
                 .setColor(0x0099FF)
                 .setTitle('Party Notify ')
                 .setDescription('Select the button of party type you want to be notified.')
-                .addFields({ name: '@pnotify [PT_TYPE]', value: ' ' })
+                .addFields({ name: '@ptnotify [PT_TYPE]', value: ' ' })
                 .setThumbnail(interaction.guild.iconURL())
 
             const row = new ActionRowBuilder();

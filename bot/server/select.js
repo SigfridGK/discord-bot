@@ -19,7 +19,6 @@ exports.selectPTType = function (req, callback) {
     function (result) {
 		if (result == 'error') {
 			var resultObj = {'data': resultdata, 'status': 'error', 'message': 'Server Error'};
-            console.log(resultObj)
 		}else{
 			var resultObj = {'data': result, 'status': '000', 'message': 'success'};
             callback(resultObj)
@@ -29,9 +28,9 @@ exports.selectPTType = function (req, callback) {
 
 exports.selectPTTypeMembers = function (req, callback) {
 	var resultdata = JSON.stringify({});
-	var strval = [req]
+	var strval = []
     var table = configJS.isDev ? "dev_pt_notify" : "pt_notify"
-	var strsql = "SELECT members FROM "+table+" WHERE pt_type=?";
+	var strsql = 'SELECT members,pt_type FROM '+table+'	 WHERE pt_type LIKE "%'+req+'%" LIMIT 1';
 	mysqltrigger.selectAllQuery(
         connection.lizbot_connect, 
         strsql, 
@@ -40,9 +39,12 @@ exports.selectPTTypeMembers = function (req, callback) {
     function (result) {
 		if (result == 'error') {
 			var resultObj = {'data': resultdata, 'status': 'error', 'message': 'Server Error'};
-            console.log(resultObj)
+            console.log(resultObj + " ->selectPTTypeMembers")
 		}else{
-			var resultObj = {'data': result[0].members, 'status': '000', 'message': 'success'};
+			if (result.length > 0) {
+				resultdata =  result[0];
+			}
+			var resultObj = {'data': resultdata, 'status': '000', 'message': 'success'};
             callback(resultObj)
 		}
 	});
@@ -61,9 +63,12 @@ exports.selectPTList = function (callback) {
     function (result) {
 		if (result == 'error') {
 			var resultObj = {'data': resultdata, 'status': 'error', 'message': 'Server Error'};
-            console.log(resultObj)
+            console.log(resultObj + " ->selectPTList")
 		}else{
-			var resultObj = {'data': result[0].pt_data, 'status': '000', 'message': 'success'};
+			if (result.length > 0) {
+				resultdata =  result[0].pt_data;
+			}
+			var resultObj = {'data': resultdata, 'status': '000', 'message': 'success'};
             callback(resultObj)
 		}
 	});
