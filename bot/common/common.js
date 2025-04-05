@@ -37,6 +37,10 @@ function padValue(value) {
     return (value < 10) ? "0" + value : value;
 }
 
+exports.padValue = function(value) {
+    return (value < 10) ? "0" + value : value;
+}
+
 exports.writeErrorLogV2 = function(filename, functionname, errormessage) {
     //generate error log filename
     var newDate = new Date();

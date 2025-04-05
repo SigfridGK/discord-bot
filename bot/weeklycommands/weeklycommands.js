@@ -4,7 +4,7 @@ const { blockQuote, bold } = require('discord.js');
 
 // Weekly Create
 exports.weeklycreate = function (message) { 
-    if (message.content.toLowerCase().includes("@ptnotify")){
+    if (message.content.toLowerCase().includes("@weekly")){
 		const messageArr = message.content.split(" ");
 		if (messageArr.length >= 2) {
 			const channel = message.channel
